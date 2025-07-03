@@ -13,15 +13,25 @@ export async function middleware(request: NextRequest) {
     return new Response('pong', { status: 200 });
   }
 
-  if (pathname.startsWith('/api/auth')) {
+  if (pathname.startsWith('/api/auth') || pathname.startsWith('/iframe-auth')) {
     return NextResponse.next();
   }
 
-  // Check if the request is from an iframe
+  // Enhanced iframe detection
   const referer = request.headers.get('referer');
-  const isIframe = request.headers.get('sec-fetch-dest') === 'iframe' ||
-                   request.headers.get('sec-fetch-mode') === 'navigate' ||
-                   (referer && new URL(referer).origin !== new URL(request.url).origin);
+  const secFetchDest = request.headers.get('sec-fetch-dest');
+  const secFetchSite = request.headers.get('sec-fetch-site');
+  const forceIframe = request.nextUrl.searchParams.has('iframe') || 
+                      request.nextUrl.searchParams.get('mode') === 'iframe';
+  
+  // Check if request is coming from an iframe context
+  const isIframe = forceIframe ||
+                   secFetchDest === 'iframe' ||
+                   secFetchSite === 'cross-site' ||
+                   (referer && 
+                    referer !== request.url && 
+                    !referer.includes(new URL(request.url).hostname) &&
+                    new URL(referer).hostname !== new URL(request.url).hostname);
 
   const token = await getToken({
     req: request,
@@ -30,14 +40,11 @@ export async function middleware(request: NextRequest) {
   });
 
   if (!token) {
-    // If it's an iframe context, handle authentication differently to prevent loops
+    // For iframe contexts, redirect to special iframe auth page
     if (isIframe) {
-      // For iframe context, automatically sign in as guest without redirect
-      const guestSignInUrl = new URL('/api/auth/guest', request.url);
-      guestSignInUrl.searchParams.set('redirectUrl', request.url);
-      guestSignInUrl.searchParams.set('iframe', 'true');
-      
-      return NextResponse.redirect(guestSignInUrl);
+      const iframeAuthUrl = new URL('/iframe-auth', request.url);
+      iframeAuthUrl.searchParams.set('redirectUrl', request.url);
+      return NextResponse.redirect(iframeAuthUrl);
     }
     
     const redirectUrl = encodeURIComponent(request.url);
@@ -52,7 +59,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // Add headers to allow iframe embedding
+  // Add headers to allow iframe embedding for all authenticated requests
   const response = NextResponse.next();
   
   // Remove X-Frame-Options to allow iframe embedding
@@ -74,6 +81,7 @@ export const config = {
     '/api/:path*',
     '/login',
     '/register',
+    '/iframe-auth',
 
     /*
      * Match all request paths except for the ones starting with:
