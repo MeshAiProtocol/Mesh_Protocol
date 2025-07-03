@@ -29,11 +29,50 @@ export async function middleware(request: NextRequest) {
   });
 
   if (!token) {
-    // If accessed via iframe and no token, automatically redirect to guest auth
+    // If accessed via iframe and no token, return a simple page instead of redirecting
     if (isIframe) {
-      return NextResponse.redirect(
-        new URL('/api/auth/guest', request.url),
-      );
+      return new Response(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Authentication Required</title>
+            <style>
+              body { 
+                font-family: system-ui, sans-serif; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                height: 100vh; 
+                margin: 0; 
+                background: #f5f5f5; 
+              }
+              .container { text-align: center; padding: 2rem; }
+              .btn { 
+                background: #0070f3; 
+                color: white; 
+                padding: 0.5rem 1rem; 
+                border: none; 
+                border-radius: 0.25rem; 
+                text-decoration: none; 
+                display: inline-block; 
+                margin-top: 1rem; 
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h2>Authentication Required</h2>
+              <p>This application requires authentication.</p>
+              <a href="${request.url}" target="_blank" class="btn">Open in New Tab</a>
+            </div>
+          </body>
+        </html>
+      `, {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/html',
+        },
+      });
     }
 
     const redirectUrl = encodeURIComponent(request.url);
