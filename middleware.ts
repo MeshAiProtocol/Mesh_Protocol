@@ -13,25 +13,9 @@ export async function middleware(request: NextRequest) {
     return new Response('pong', { status: 200 });
   }
 
-  if (pathname.startsWith('/api/auth') || pathname.startsWith('/iframe-auth')) {
+  if (pathname.startsWith('/api/auth')) {
     return NextResponse.next();
   }
-
-  // Enhanced iframe detection
-  const referer = request.headers.get('referer');
-  const secFetchDest = request.headers.get('sec-fetch-dest');
-  const secFetchSite = request.headers.get('sec-fetch-site');
-  const forceIframe = request.nextUrl.searchParams.has('iframe') || 
-                      request.nextUrl.searchParams.get('mode') === 'iframe';
-  
-  // Check if request is coming from an iframe context
-  const isIframe = forceIframe ||
-                   secFetchDest === 'iframe' ||
-                   secFetchSite === 'cross-site' ||
-                   (referer && 
-                    referer !== request.url && 
-                    !referer.includes(new URL(request.url).hostname) &&
-                    new URL(referer).hostname !== new URL(request.url).hostname);
 
   const token = await getToken({
     req: request,
@@ -40,14 +24,8 @@ export async function middleware(request: NextRequest) {
   });
 
   if (!token) {
-    // For iframe contexts, redirect to special iframe auth page
-    if (isIframe) {
-      const iframeAuthUrl = new URL('/iframe-auth', request.url);
-      iframeAuthUrl.searchParams.set('redirectUrl', request.url);
-      return NextResponse.redirect(iframeAuthUrl);
-    }
-    
     const redirectUrl = encodeURIComponent(request.url);
+
     return NextResponse.redirect(
       new URL(`/api/auth/guest?redirectUrl=${redirectUrl}`, request.url),
     );
@@ -59,19 +37,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // Add headers to allow iframe embedding for all authenticated requests
-  const response = NextResponse.next();
-  
-  // Remove X-Frame-Options to allow iframe embedding
-  response.headers.delete('X-Frame-Options');
-  
-  // Set Content Security Policy to allow iframe embedding
-  response.headers.set(
-    'Content-Security-Policy',
-    "frame-ancestors 'self' *; default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: *"
-  );
-
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
@@ -81,7 +47,6 @@ export const config = {
     '/api/:path*',
     '/login',
     '/register',
-    '/iframe-auth',
 
     /*
      * Match all request paths except for the ones starting with:
