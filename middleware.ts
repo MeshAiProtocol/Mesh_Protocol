@@ -17,10 +17,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check if the request is coming from an iframe context
+  // Check if the request is from an iframe
+  const referer = request.headers.get('referer');
   const isIframe = request.headers.get('sec-fetch-dest') === 'iframe' ||
-                   request.headers.get('sec-fetch-site') === 'cross-site' ||
-                   request.headers.get('referer');
+                   request.headers.get('sec-fetch-mode') === 'navigate' ||
+                   (referer && new URL(referer).origin !== new URL(request.url).origin);
 
   const token = await getToken({
     req: request,
@@ -29,54 +30,17 @@ export async function middleware(request: NextRequest) {
   });
 
   if (!token) {
-    // If accessed via iframe and no token, return a simple page instead of redirecting
+    // If it's an iframe context, handle authentication differently to prevent loops
     if (isIframe) {
-      return new Response(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>Authentication Required</title>
-            <style>
-              body { 
-                font-family: system-ui, sans-serif; 
-                display: flex; 
-                align-items: center; 
-                justify-content: center; 
-                height: 100vh; 
-                margin: 0; 
-                background: #f5f5f5; 
-              }
-              .container { text-align: center; padding: 2rem; }
-              .btn { 
-                background: #0070f3; 
-                color: white; 
-                padding: 0.5rem 1rem; 
-                border: none; 
-                border-radius: 0.25rem; 
-                text-decoration: none; 
-                display: inline-block; 
-                margin-top: 1rem; 
-              }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h2>Authentication Required</h2>
-              <p>This application requires authentication.</p>
-              <a href="${request.url}" target="_blank" class="btn">Open in New Tab</a>
-            </div>
-          </body>
-        </html>
-      `, {
-        status: 200,
-        headers: {
-          'Content-Type': 'text/html',
-        },
-      });
+      // For iframe context, automatically sign in as guest without redirect
+      const guestSignInUrl = new URL('/api/auth/guest', request.url);
+      guestSignInUrl.searchParams.set('redirectUrl', request.url);
+      guestSignInUrl.searchParams.set('iframe', 'true');
+      
+      return NextResponse.redirect(guestSignInUrl);
     }
-
+    
     const redirectUrl = encodeURIComponent(request.url);
-
     return NextResponse.redirect(
       new URL(`/api/auth/guest?redirectUrl=${redirectUrl}`, request.url),
     );
@@ -88,7 +52,19 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  return NextResponse.next();
+  // Add headers to allow iframe embedding
+  const response = NextResponse.next();
+  
+  // Remove X-Frame-Options to allow iframe embedding
+  response.headers.delete('X-Frame-Options');
+  
+  // Set Content Security Policy to allow iframe embedding
+  response.headers.set(
+    'Content-Security-Policy',
+    "frame-ancestors 'self' *; default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: *"
+  );
+
+  return response;
 }
 
 export const config = {
