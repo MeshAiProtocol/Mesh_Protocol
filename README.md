@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="logo.png" alt="Mesh AI Protocol Logo" width="200" height="200">
+<img src="public\images\logo.png" alt="Mesh AI Protocol Logo" width="200" height="200">
 
 # 🚀 Mesh AI Protocol
 
