@@ -186,10 +186,10 @@ const ReadingLevelSelector = ({
           <TooltipTrigger asChild>
             <motion.div
               className={cx(
-                'absolute bg-background p-3 border rounded-full flex flex-row items-center',
+                'absolute  p-3 border rounded-full flex flex-row items-center',
                 {
                   'bg-primary text-primary-foreground': currentLevel !== 2,
-                  'bg-background text-foreground': currentLevel === 2,
+                  ' text-foreground': currentLevel === 2,
                 },
               )}
               style={{ y }}
@@ -370,7 +370,7 @@ const PureToolbar = ({
   return (
     <TooltipProvider delayDuration={0}>
       <motion.div
-        className="cursor-pointer absolute right-6 bottom-6 p-1.5 border rounded-full shadow-lg bg-background flex flex-col justify-end"
+        className="cursor-pointer absolute right-6 bottom-6 p-1.5 border rounded-full shadow-lg  flex flex-col justify-end"
         initial={{ opacity: 0, y: -20, scale: 1 }}
         animate={
           isToolbarVisible

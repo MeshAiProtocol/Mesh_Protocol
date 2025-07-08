@@ -49,21 +49,21 @@ export function WorkspacePanel({
 }: WorkspacePanelProps) {
   return (
     <Card className={cn(
-      "flex flex-col h-full overflow-hidden workspace-panel",
+      "flex flex-col h-full overflow-hidden glass-card",
       className
     )}>
       {/* Panel Header */}
-      <div className="flex items-center justify-between p-4 border-b border-border/30 bg-gradient-to-r from-muted/20 to-muted/10">
+      <div className="flex items-center justify-between p-4  bg-gradient-to-r from-[rgba(216,231,242,0.05)] to-[rgba(216,231,242,0.02)] backdrop-blur-sm">
         <div className="flex items-center gap-3">
           {icon && (
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-muted border border-border/50">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[rgba(216,231,242,0.1)] border border-[rgba(216,231,242,0.15)] backdrop-blur-sm">
               {icon}
             </div>
           )}
           <div>
-            <h2 className="font-semibold text-lg">{title}</h2>
+            <h2 className="font-semibold text-lg text-white">{title}</h2>
             {subtitle && (
-              <p className="text-sm text-muted-foreground">{subtitle}</p>
+              <p className="text-sm text-[rgba(216,231,242,0.7)]">{subtitle}</p>
             )}
           </div>
         </div>
@@ -73,20 +73,20 @@ export function WorkspacePanel({
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-muted/50">
-                <MoreHorizontal className="w-4 h-4" />
+              <Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-[rgba(216,231,242,0.1)] border border-[rgba(216,231,242,0.1)]">
+                <MoreHorizontal className="w-4 h-4 text-[rgba(216,231,242,0.8)]" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="glass-effect">
-              <DropdownMenuItem>
+            <DropdownMenuContent align="end" className="glass-card border-[rgba(216,231,242,0.1)]">
+              <DropdownMenuItem className="hover:bg-[rgba(216,231,242,0.1)]">
                 <Maximize2 className="w-4 h-4 mr-2" />
                 Maximize
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-[rgba(216,231,242,0.1)]">
                 <Minimize2 className="w-4 h-4 mr-2" />
                 Minimize
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-destructive">
+              <DropdownMenuItem className="text-destructive hover:bg-[rgba(239,68,68,0.1)]">
                 <X className="w-4 h-4 mr-2" />
                 Close
               </DropdownMenuItem>
@@ -118,7 +118,7 @@ export function MultiPanelWorkspace({
     <div className={cn("h-full p-4 workspace-container", className)}>
       <ResizablePanelGroup 
         direction={orientation}
-        className="h-full rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm shadow-2xl"
+        className="h-full rounded-2xl  bg-[rgba(8,8,8,0.3)] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
       >
         {children}
       </ResizablePanelGroup>

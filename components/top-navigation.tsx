@@ -64,14 +64,14 @@ export function TopNavigation() {
   ) || workspaces[0];
 
   return (
-    <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b /80 backdrop-blur-sm sticky top-0 z-50">
       <div className="flex items-center justify-between px-4 py-3">
         {/* Brand & Logo */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-black dark:bg-white rounded-lg flex items-center justify-center">
+            {/* <div className="w-8 h-8 bg-black dark:bg-white rounded-lg flex items-center justify-center">
               <Zap className="w-5 h-5 text-white dark:text-black" />
-            </div>
+            </div> */}
             <div className="flex flex-col">
               <span className="font-bold text-lg text-black dark:text-white">
                 Mesh AI

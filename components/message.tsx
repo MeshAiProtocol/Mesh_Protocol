@@ -60,7 +60,7 @@ const PurePreviewMessage = ({
           )}
         >
           {message.role === 'assistant' && (
-            <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-border bg-background">
+            <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-[rgba(216,231,242,0.2)] bg-[rgba(8,8,8,0.6)] backdrop-blur-sm">
               <div className="translate-y-px">
                 <SparklesIcon size={14} />
               </div>
@@ -111,7 +111,7 @@ const PurePreviewMessage = ({
                             <Button
                               data-testid="message-edit-button"
                               variant="ghost"
-                              className="px-2 h-fit rounded-full text-muted-foreground opacity-0 group-hover/message:opacity-100"
+                              className="px-2 h-fit rounded-full text-[rgba(216,231,242,0.7)] opacity-0 group-hover/message:opacity-100 hover:bg-[rgba(216,231,242,0.1)]"
                               onClick={() => {
                                 setMode('edit');
                               }}
@@ -126,8 +126,10 @@ const PurePreviewMessage = ({
                       <div
                         data-testid="message-content"
                         className={cn('flex flex-col gap-4', {
-                          'bg-primary text-primary-foreground px-3 py-2 rounded-xl':
+                          'glass-card px-4 py-3 rounded-2xl border-[rgba(216,231,242,0.15)]':
                             message.role === 'user',
+                          'glass-card px-4 py-3 rounded-2xl border-[rgba(216,231,242,0.1)]':
+                            message.role === 'assistant',
                         })}
                       >
                         <Markdown>{sanitizeText(part.text)}</Markdown>

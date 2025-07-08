@@ -61,16 +61,16 @@ const PureChatItem = ({
           </SidebarMenuAction>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent side="bottom" align="end">
+        <DropdownMenuContent side="bottom" align="end" className="glass-card border-[rgba(216,231,242,0.1)]">
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger className="cursor-pointer">
+            <DropdownMenuSubTrigger className="cursor-pointer hover:bg-[rgba(216,231,242,0.1)]">
               <ShareIcon />
               <span>Share</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
-              <DropdownMenuSubContent>
+              <DropdownMenuSubContent className="glass-card border-[rgba(216,231,242,0.1)]">
                 <DropdownMenuItem
-                  className="cursor-pointer flex-row justify-between"
+                  className="cursor-pointer flex-row justify-between hover:bg-[rgba(216,231,242,0.1)]"
                   onClick={() => {
                     setVisibilityType('private');
                   }}
@@ -84,7 +84,7 @@ const PureChatItem = ({
                   ) : null}
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  className="cursor-pointer flex-row justify-between"
+                  className="cursor-pointer flex-row justify-between hover:bg-[rgba(216,231,242,0.1)]"
                   onClick={() => {
                     setVisibilityType('public');
                   }}
@@ -100,7 +100,7 @@ const PureChatItem = ({
           </DropdownMenuSub>
 
           <DropdownMenuItem
-            className="cursor-pointer text-destructive focus:bg-destructive/15 focus:text-destructive dark:text-red-500"
+            className="cursor-pointer text-destructive focus:bg-[rgba(239,68,68,0.1)] focus:text-destructive dark:text-red-500 hover:bg-[rgba(239,68,68,0.1)]"
             onSelect={() => onDelete(chat.id)}
           >
             <TrashIcon />

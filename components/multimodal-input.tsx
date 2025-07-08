@@ -201,109 +201,74 @@ function PureMultimodalInput({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className="absolute left-1/2 bottom-28 -translate-x-1/2 z-50"
+            className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-10"
           >
             <Button
-              data-testid="scroll-to-bottom-button"
-              className="rounded-full"
-              size="icon"
+              onClick={() => scrollToBottom()}
+              size="sm"
               variant="outline"
-              onClick={(event) => {
-                event.preventDefault();
-                scrollToBottom();
-              }}
+              className="glass-card border-[rgba(216,231,242,0.15)] hover:bg-[rgba(216,231,242,0.1)]"
             >
-              <ArrowDown />
+              <ArrowDown className="w-4 h-4 mr-1" />
+              Scroll to bottom
             </Button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {messages.length === 0 &&
-        attachments.length === 0 &&
-        uploadQueue.length === 0 && (
+      {/* Suggested Actions - Floating above input */}
+      {/* {messages.length === 0 && input.length === 0 && (
+        <div className="absolute -top-20 left-0 right-0 z-20">
           <SuggestedActions
             append={append}
             chatId={chatId}
             selectedVisibilityType={selectedVisibilityType}
           />
-        )}
-
-      <input
-        type="file"
-        className="fixed -top-4 -left-4 size-0.5 opacity-0 pointer-events-none"
-        ref={fileInputRef}
-        multiple
-        onChange={handleFileChange}
-        tabIndex={-1}
-      />
-
-      {(attachments.length > 0 || uploadQueue.length > 0) && (
-        <div
-          data-testid="attachments-preview"
-          className="flex flex-row gap-2 overflow-x-scroll items-end"
-        >
-          {attachments.map((attachment) => (
-            <PreviewAttachment key={attachment.url} attachment={attachment} />
-          ))}
-
-          {uploadQueue.map((filename) => (
-            <PreviewAttachment
-              key={filename}
-              attachment={{
-                url: '',
-                name: filename,
-                contentType: '',
-              }}
-              isUploading={true}
-            />
-          ))}
         </div>
-      )}
+      )} */}
 
-      <Textarea
-        data-testid="multimodal-input"
-        ref={textareaRef}
-        placeholder="Send a message..."
-        value={input}
-        onChange={handleInput}
-        className={cx(
-          'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-2xl !text-base bg-muted pb-10 dark:border-zinc-700',
-          className,
-        )}
-        rows={2}
-        autoFocus
-        onKeyDown={(event) => {
-          if (
-            event.key === 'Enter' &&
-            !event.shiftKey &&
-            !event.nativeEvent.isComposing
-          ) {
-            event.preventDefault();
+      <div className="glass-card rounded-2xl border-[rgba(216,231,242,0.1)] p-4">
+        <div className="flex items-end gap-2">
+          <div className="flex-1 min-w-0">
+            <Textarea
+              ref={textareaRef}
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                  event.preventDefault();
+                  submitForm();
+                }
+              }}
+              placeholder="Send a message..."
+              value={input}
+              onChange={handleInput}
+              className="min-h-[60px] w-full resize-none bg-transparent px-0 py-0 focus-within:outline-none sm:text-sm border-0 shadow-none focus:ring-0 placeholder:text-[rgba(216,231,242,0.5)] text-white"
+              style={{
+                fontSize: 16,
+              }}
+            />
+          </div>
 
-            if (status !== 'ready') {
-              toast.error('Please wait for the model to finish its response!');
-            } else {
-              submitForm();
-            }
-          }
-        }}
-      />
+          <div className="flex items-center gap-2">
+            <PureAttachmentsButton fileInputRef={fileInputRef} status={status} />
+            <PureStopButton stop={stop} setMessages={setMessages} />
+            <PureSendButton
+              submitForm={submitForm}
+              input={input}
+              uploadQueue={uploadQueue}
+            />
+          </div>
+        </div>
 
-      <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start">
-        <AttachmentsButton fileInputRef={fileInputRef} status={status} />
-      </div>
-
-      <div className="absolute bottom-0 right-0 p-2 w-fit flex flex-row justify-end">
-        {status === 'submitted' ? (
-          <StopButton stop={stop} setMessages={setMessages} />
-        ) : (
-          <SendButton
-            input={input}
-            submitForm={submitForm}
-            uploadQueue={uploadQueue}
-          />
+        {attachments.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-3">
+            {attachments.map((attachment) => (
+              <PreviewAttachment
+                key={attachment.url}
+                attachment={attachment}
+              />
+            ))}
+          </div>
         )}
       </div>
     </div>

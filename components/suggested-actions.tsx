@@ -19,23 +19,23 @@ function PureSuggestedActions({
 }: SuggestedActionsProps) {
   const suggestedActions = [
     {
-      title: 'Test API endpoints',
-      label: 'and validate responses',
+      title: 'Test APIs',
+      label: 'Validate endpoints',
       action: 'Help me test and validate API endpoints with proper request/response handling',
     },
     {
-      title: 'Generate integration',
-      label: 'scripts and workflows',
+      title: 'Build integrations',
+      label: 'Create workflows',
       action: 'Create integration scripts and automation workflows for my application',
     },
     {
-      title: 'Analyze data structure',
-      label: 'and optimize queries',
+      title: 'Optimize data',
+      label: 'Analyze queries',
       action: 'Analyze my data structure and help optimize database queries and performance',
     },
     {
-      title: 'Build AI-powered',
-      label: 'application features',
+      title: 'AI features',
+      label: 'Build with Mesh AI',
       action: 'Help me build AI-powered features using the Mesh AI Protocol framework',
     },
   ];
@@ -43,7 +43,7 @@ function PureSuggestedActions({
   return (
     <div
       data-testid="suggested-actions"
-      className="grid sm:grid-cols-2 gap-3 w-full max-w-2xl"
+      className="grid sm:grid-cols-2 gap-2 w-full max-w-xl"
     >
       {suggestedActions.map((suggestedAction, index) => (
         <motion.div
@@ -64,10 +64,10 @@ function PureSuggestedActions({
                 content: suggestedAction.action,
               });
             }}
-            className="text-left border-2 border-dashed border-border/50 hover:border-primary/50 rounded-xl px-4 py-4 text-sm flex-1 gap-1 sm:flex-col w-full h-auto justify-start items-start hover:bg-primary/5 transition-all duration-200"
+            className="text-left glass-card border-[rgba(216,231,242,0.1)] hover:border-[rgba(216,231,242,0.2)] hover:bg-[rgba(216,231,242,0.05)] rounded-xl px-3 py-2 text-xs flex-1 gap-1 sm:flex-col w-full h-auto justify-start items-start transition-all duration-200"
           >
-            <span className="font-semibold text-foreground">{suggestedAction.title}</span>
-            <span className="text-muted-foreground text-xs">
+            <span className="font-medium text-white">{suggestedAction.title}</span>
+            <span className="text-[rgba(216,231,242,0.6)] text-xs">
               {suggestedAction.label}
             </span>
           </Button>
