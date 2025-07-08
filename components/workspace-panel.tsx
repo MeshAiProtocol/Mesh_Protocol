@@ -118,7 +118,7 @@ export function MultiPanelWorkspace({
     <div className={cn("h-full p-4 workspace-container", className)}>
       <ResizablePanelGroup 
         direction={orientation}
-        className="h-full rounded-2xl  bg-[rgba(8,8,8,0.3)] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+        className="h-full rounded-2xl  backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
       >
         {children}
       </ResizablePanelGroup>
