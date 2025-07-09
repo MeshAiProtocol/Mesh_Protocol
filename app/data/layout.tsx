@@ -1,4 +1,6 @@
 import { cookies } from 'next/headers';
+import Script from 'next/script';
+
 import { AppSidebar } from '@/components/app-sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { TopNavigation } from '@/components/top-navigation';
@@ -6,7 +8,7 @@ import { auth } from '../(auth)/auth';
 
 export const experimental_ppr = true;
 
-export default async function ApiTestLayout({
+export default async function DataLayout({
   children,
 }: {
   children: React.ReactNode;

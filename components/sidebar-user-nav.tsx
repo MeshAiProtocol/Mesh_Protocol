@@ -71,14 +71,6 @@ export function SidebarUserNav({ user }: { user: User }) {
             side="top"
             className="w-[--radix-popper-anchor-width] glass-card border-[rgba(216,231,242,0.1)]"
           >
-            <DropdownMenuItem
-              data-testid="user-nav-item-theme"
-              className="cursor-pointer hover:bg-[rgba(216,231,242,0.1)]"
-              onSelect={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-            >
-              {`Toggle ${resolvedTheme === 'light' ? 'dark' : 'light'} mode`}
-            </DropdownMenuItem>
-            <DropdownMenuSeparator className="bg-[rgba(216,231,242,0.1)]" />
             <DropdownMenuItem asChild data-testid="user-nav-item-auth">
               <button
                 type="button"

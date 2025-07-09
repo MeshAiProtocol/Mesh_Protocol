@@ -62,10 +62,11 @@ export default async function Page() {
         
         <ResizableHandle withHandle />
         
-        <ResizablePanel defaultSize={30} minSize={20}>
+        <ResizablePanel defaultSize={30} minSize={20}  className='hidden md:block'>
           <WorkspacePanel
             title="Context & Tools"
             subtitle="Additional context and AI tools"
+           
             icon={<Brain className="w-4 h-4" />}
           >
             <div className="p-4 h-full flex flex-col gap-4">
