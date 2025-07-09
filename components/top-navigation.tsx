@@ -22,6 +22,7 @@ import {
   DropdownMenuItem, 
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
+import Image from 'next/image';
 
 const workspaces = [
   { 
@@ -69,15 +70,7 @@ export function TopNavigation() {
         {/* Brand & Logo */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            {/* <div className="w-8 h-8 bg-black dark:bg-white rounded-lg flex items-center justify-center">
-              <Zap className="w-5 h-5 text-white dark:text-black" />
-            </div> */}
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-black dark:text-white">
-                Mesh AI
-              </span>
-              <span className="text-xs text-muted-foreground -mt-1">Protocol</span>
-            </div>
+            <Image src="/images/logo.png" alt="Mesh AI Logo" width={64} height={64} className="rounded-lg" />
           </div>
           
           {/* Workspace Selector */}
