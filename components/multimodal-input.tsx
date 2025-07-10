@@ -209,7 +209,7 @@ function PureMultimodalInput({
               variant="outline"
               className="glass-card border-[rgba(216,231,242,0.15)] hover:bg-[rgba(216,231,242,0.1)]"
             >
-              <ArrowDown className="w-4 h-4 mr-1" />
+              <ArrowDown className="size-4 mr-1" />
               Scroll to bottom
             </Button>
           </motion.div>

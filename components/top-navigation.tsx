@@ -26,10 +26,17 @@ import Image from 'next/image';
 
 const workspaces = [
   { 
+    id: 'dashboard', 
+    label: 'Dashboard', 
+    icon: Zap, 
+    path: '/',
+    description: 'Overview and quick access to all tools'
+  },
+  { 
     id: 'chat', 
     label: 'AI Chat', 
     icon: MessageSquare, 
-    path: '/',
+    path: '/chat',
     description: 'Conversational AI interface'
   },
   { 
@@ -90,7 +97,7 @@ export function TopNavigation() {
                     isActive && "bg-primary text-primary-foreground shadow-sm"
                   )}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="size-4" />
                   <span className="hidden lg:inline">{workspace.label}</span>
                   {workspace.id === 'api-test' && (
                     <Badge variant="secondary" className="ml-1 text-xs">
@@ -106,7 +113,7 @@ export function TopNavigation() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="md:hidden">
               <Button variant="outline" size="sm">
-                <currentWorkspace.icon className="w-4 h-4 mr-2" />
+                <currentWorkspace.icon className="size-4 mr-2" />
                 {currentWorkspace.label}
               </Button>
             </DropdownMenuTrigger>
@@ -118,7 +125,7 @@ export function TopNavigation() {
                     key={workspace.id}
                     onClick={() => router.push(workspace.path)}
                   >
-                    <Icon className="w-4 h-4 mr-2" />
+                    <Icon className="size-4 mr-2" />
                     <div>
                       <div>{workspace.label}</div>
                       <div className="text-xs text-muted-foreground">
@@ -136,7 +143,7 @@ export function TopNavigation() {
         <div className="flex items-center gap-3">
           {/* Global Search */}
           <div className="hidden sm:flex items-center relative">
-            <Search className="w-4 h-4 absolute left-3 text-muted-foreground" />
+            <Search className="size-4 absolute left-3 text-muted-foreground" />
             <Input
               placeholder="Search chats, APIs, workflows..."
               value={searchValue}
@@ -148,12 +155,12 @@ export function TopNavigation() {
           {/* Quick Actions */}
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" className="relative">
-              <Bell className="w-4 h-4" />
-              <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
+              <Bell className="size-4" />
+              <span className="absolute -top-1 -right-1 size-2 bg-red-500 rounded-full" />
             </Button>
             
             <Button variant="ghost" size="icon">
-              <Settings className="w-4 h-4" />
+              <Settings className="size-4" />
             </Button>
           </div>
         </div>

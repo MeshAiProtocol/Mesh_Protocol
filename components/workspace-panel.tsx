@@ -74,20 +74,20 @@ export function WorkspacePanel({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-[rgba(216,231,242,0.1)] border border-[rgba(216,231,242,0.1)]">
-                <MoreHorizontal className="w-4 h-4 text-[rgba(216,231,242,0.8)]" />
+                <MoreHorizontal className="size-4 text-[rgba(216,231,242,0.8)]" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="glass-card border-[rgba(216,231,242,0.1)]">
               <DropdownMenuItem className="hover:bg-[rgba(216,231,242,0.1)]">
-                <Maximize2 className="w-4 h-4 mr-2" />
+                <Maximize2 className="size-4 mr-2" />
                 Maximize
               </DropdownMenuItem>
               <DropdownMenuItem className="hover:bg-[rgba(216,231,242,0.1)]">
-                <Minimize2 className="w-4 h-4 mr-2" />
+                <Minimize2 className="size-4 mr-2" />
                 Minimize
               </DropdownMenuItem>
               <DropdownMenuItem className="text-destructive hover:bg-[rgba(239,68,68,0.1)]">
-                <X className="w-4 h-4 mr-2" />
+                <X className="size-4 mr-2" />
                 Close
               </DropdownMenuItem>
             </DropdownMenuContent>

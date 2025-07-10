@@ -28,7 +28,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
         <SidebarMenu>
           <div className="flex flex-row justify-between items-center px-2 py-1">
             <div className="flex items-center gap-2">
-              <History className="w-4 h-4 text-[rgba(216,231,242,0.7)]" />
+              <History className="size-4 text-[rgba(216,231,242,0.7)]" />
               <span className="font-medium text-sm text-white">Recent Activity</span>
             </div>
             <Tooltip>
@@ -43,7 +43,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                     router.refresh();
                   }}
                 >
-                  <Plus className="w-4 h-4 text-[rgba(216,231,242,0.8)]" />
+                  <Plus className="size-4 text-[rgba(216,231,242,0.8)]" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent align="end" className="glass-card border-[rgba(216,231,242,0.1)]">New Chat</TooltipContent>

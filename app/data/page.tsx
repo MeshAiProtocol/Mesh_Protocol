@@ -48,7 +48,7 @@ export default function DataHubPage() {
     {
       name: "PostgreSQL DB",
       description: "Primary application database",
-      icon: <Database className="w-4 h-4 text-blue-400" />,
+      icon: <Database className="size-4 text-blue-400" />,
       type: "Database",
       status: "connected",
       lastSync: "2 minutes ago",
@@ -59,7 +59,7 @@ export default function DataHubPage() {
     {
       name: "Stripe API",
       description: "Payment and subscription data",
-      icon: <Globe className="w-4 h-4 text-purple-400" />,
+      icon: <Globe className="size-4 text-purple-400" />,
       type: "API",
       status: "connected", 
       lastSync: "5 minutes ago",
@@ -70,7 +70,7 @@ export default function DataHubPage() {
     {
       name: "CSV Uploads",
       description: "Bulk data import files",
-      icon: <FileText className="w-4 h-4 text-green-400" />,
+      icon: <FileText className="size-4 text-green-400" />,
       type: "File",
       status: "syncing",
       lastSync: "1 hour ago",
@@ -81,7 +81,7 @@ export default function DataHubPage() {
     {
       name: "MongoDB",
       description: "Document store for analytics",
-      icon: <Server className="w-4 h-4 text-orange-400" />,
+      icon: <Server className="size-4 text-orange-400" />,
       type: "Database",
       status: "connected",
       lastSync: "10 minutes ago", 
@@ -92,7 +92,7 @@ export default function DataHubPage() {
     {
       name: "S3 Storage",
       description: "Cloud file storage and backups",
-      icon: <Cloud className="w-4 h-4 text-cyan-400" />,
+      icon: <Cloud className="size-4 text-cyan-400" />,
       type: "Storage",
       status: "connected",
       lastSync: "30 minutes ago",
@@ -133,17 +133,17 @@ export default function DataHubPage() {
   ];
 
   const stats = [
-    { label: "Total Records", value: "4.2M", change: "+12.3%", icon: <Database className="w-4 h-4 text-blue-400" /> },
-    { label: "Active Sources", value: "18", change: "+2", icon: <Activity className="w-4 h-4 text-green-400" /> },
-    { label: "Daily Queries", value: "2.8K", change: "+15.6%", icon: <Search className="w-4 h-4 text-purple-400" /> },
-    { label: "Storage Used", value: "1.2TB", change: "+8.4%", icon: <HardDrive className="w-4 h-4 text-orange-400" /> }
+    { label: "Total Records", value: "4.2M", change: "+12.3%", icon: <Database className="size-4 text-blue-400" /> },
+    { label: "Active Sources", value: "18", change: "+2", icon: <Activity className="size-4 text-green-400" /> },
+    { label: "Daily Queries", value: "2.8K", change: "+15.6%", icon: <Search className="size-4 text-purple-400" /> },
+    { label: "Storage Used", value: "1.2TB", change: "+8.4%", icon: <HardDrive className="size-4 text-orange-400" /> }
   ];
 
   const analyticsTools = [
     {
       name: "Query Builder",
       description: "Visual SQL query interface",
-      icon: <Search className="w-4 h-4 text-blue-400" />,
+      icon: <Search className="size-4 text-blue-400" />,
       category: "Query",
       users: 847,
       popular: true,
@@ -152,7 +152,7 @@ export default function DataHubPage() {
     {
       name: "Data Visualization",
       description: "Charts and dashboard builder", 
-      icon: <BarChart3 className="w-4 h-4 text-green-400" />,
+      icon: <BarChart3 className="size-4 text-green-400" />,
       category: "Visualization",
       users: 623,
       popular: true,
@@ -161,7 +161,7 @@ export default function DataHubPage() {
     {
       name: "ETL Pipeline",
       description: "Data transformation workflows",
-      icon: <Zap className="w-4 h-4 text-yellow-400" />,
+      icon: <Zap className="size-4 text-yellow-400" />,
       category: "Transform",
       users: 312,
       popular: false,
@@ -170,7 +170,7 @@ export default function DataHubPage() {
     {
       name: "ML Analytics",
       description: "Machine learning insights",
-      icon: <TrendingUp className="w-4 h-4 text-purple-400" />,
+      icon: <TrendingUp className="size-4 text-purple-400" />,
       category: "AI/ML",
       users: 189,
       popular: false,
@@ -179,7 +179,7 @@ export default function DataHubPage() {
     {
       name: "Data Monitoring",
       description: "Real-time data quality checks",
-      icon: <Eye className="w-4 h-4 text-cyan-400" />,
+      icon: <Eye className="size-4 text-cyan-400" />,
       category: "Monitoring",
       users: 445,
       popular: true,
@@ -212,11 +212,11 @@ export default function DataHubPage() {
 
   const getOperationIcon = (type: string) => {
     switch (type) {
-      case 'export': return <Download className="w-3 h-3 text-green-400" />;
-      case 'import': return <Upload className="w-3 h-3 text-blue-400" />;
-      case 'sync': return <RefreshCw className="w-3 h-3 text-purple-400" />;
-      case 'query': return <Search className="w-3 h-3 text-cyan-400" />;
-      default: return <Activity className="w-3 h-3 text-gray-400" />;
+      case 'export': return <Download className="size-3 text-green-400" />;
+      case 'import': return <Upload className="size-3 text-blue-400" />;
+      case 'sync': return <RefreshCw className="size-3 text-purple-400" />;
+      case 'query': return <Search className="size-3 text-cyan-400" />;
+      default: return <Activity className="size-3 text-gray-400" />;
     }
   };
 
@@ -280,14 +280,14 @@ export default function DataHubPage() {
               onClick={handleImportData}
               className="glass-card px-4 py-2 rounded-xl font-medium text-white bg-green-600/80 hover:bg-green-700/80 transition shadow-md border-0 flex items-center gap-2"
             >
-              <Upload className="w-4 h-4" />
+              <Upload className="size-4" />
               Import Data
             </button>
             <button 
               onClick={handleAddSource}
               className="glass-card px-4 py-2 rounded-xl font-medium text-white bg-blue-600/80 hover:bg-blue-700/80 transition shadow-md border-0 flex items-center gap-2"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="size-4" />
               Add Source
             </button>
           </div>
@@ -323,7 +323,7 @@ export default function DataHubPage() {
                   onClick={handleViewAllOperations}
                   className="text-[rgba(216,231,242,0.7)] hover:text-white text-sm flex items-center gap-1 transition-colors"
                 >
-                  View all <ArrowRight className="w-3 h-3" />
+                  View all <ArrowRight className="size-3" />
                 </button>
               </div>
               
@@ -334,7 +334,7 @@ export default function DataHubPage() {
                     <div key={operation.id} className="glass-card p-4 rounded-xl">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-3">
-                          <div className={`w-2 h-2 rounded-full ${getStatusColor(currentStatus)}`} />
+                          <div className={`size-2 rounded-full ${getStatusColor(currentStatus)}`} />
                           <h3 className="font-medium text-white">{operation.name}</h3>
                           {getOperationIcon(operation.type)}
                         </div>
@@ -345,8 +345,8 @@ export default function DataHubPage() {
                             title={currentStatus === 'running' ? 'Pause' : 'Start'}
                           >
                             {currentStatus === 'running' ? 
-                              <Pause className="w-3 h-3 text-[rgba(216,231,242,0.7)]" /> :
-                              <Play className="w-3 h-3 text-[rgba(216,231,242,0.7)]" />
+                              <Pause className="size-3 text-[rgba(216,231,242,0.7)]" /> :
+                              <Play className="size-3 text-[rgba(216,231,242,0.7)]" />
                             }
                           </button>
                           <button 
@@ -354,7 +354,7 @@ export default function DataHubPage() {
                             className="p-1.5 hover:bg-[rgba(216,231,242,0.1)] rounded-lg transition"
                             title="View Details"
                           >
-                            <Eye className="w-3 h-3 text-[rgba(216,231,242,0.7)]" />
+                            <Eye className="size-3 text-[rgba(216,231,242,0.7)]" />
                           </button>
                         </div>
                       </div>
@@ -387,7 +387,7 @@ export default function DataHubPage() {
                   onClick={handleManageAllSources}
                   className="text-[rgba(216,231,242,0.7)] hover:text-white text-sm flex items-center gap-1 transition-colors"
                 >
-                  Manage all <Settings className="w-3 h-3" />
+                  Manage all <Settings className="size-3" />
                 </button>
               </div>
               
@@ -406,8 +406,8 @@ export default function DataHubPage() {
                         <div className="flex items-start justify-between mb-1">
                           <h3 className="font-medium text-white text-sm leading-tight">{source.name}</h3>
                           <div className="flex items-center gap-1">
-                            {source.popular && <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />}
-                            <div className={`w-2 h-2 rounded-full ${getStatusColor(source.status)}`} />
+                            {source.popular && <Star className="size-3 fill-yellow-400 text-yellow-400" />}
+                            <div className={`size-2 rounded-full ${getStatusColor(source.status)}`} />
                           </div>
                         </div>
                         <p className="text-[rgba(216,231,242,0.6)] text-xs leading-relaxed">{source.description}</p>
@@ -434,7 +434,7 @@ export default function DataHubPage() {
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold text-white">Analytics Tools</h2>
               <div className="flex items-center gap-1 text-xs text-[rgba(216,231,242,0.6)]">
-                <Users className="w-3 h-3 text-blue-400" />
+                <Users className="size-3 text-blue-400" />
                 Popular
               </div>
             </div>
@@ -454,7 +454,7 @@ export default function DataHubPage() {
                       <div className="flex items-start justify-between mb-1">
                         <h3 className="font-medium text-white text-sm leading-tight">{tool.name}</h3>
                         {tool.popular && (
-                          <Star className="w-3 h-3 fill-yellow-400 text-yellow-400 flex-shrink-0 ml-2" />
+                          <Star className="size-3 fill-yellow-400 text-yellow-400 flex-shrink-0 ml-2" />
                         )}
                       </div>
                       <p className="text-[rgba(216,231,242,0.6)] text-xs leading-relaxed">{tool.description}</p>
@@ -464,7 +464,7 @@ export default function DataHubPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3 text-xs text-[rgba(216,231,242,0.7)]">
                       <div className="flex items-center gap-1">
-                        <Users className="w-3 h-3 text-blue-400" />
+                        <Users className="size-3 text-blue-400" />
                         <span>{tool.users}</span>
                       </div>
                     </div>
@@ -481,7 +481,7 @@ export default function DataHubPage() {
                 onClick={handleExploreAllTools}
                 className="w-full glass-card p-3 rounded-xl text-[rgba(216,231,242,0.7)] hover:text-white hover:bg-[rgba(216,231,242,0.02)] transition-all flex items-center justify-center gap-2 text-sm hover:scale-[1.02] border border-[rgba(216,231,242,0.08)]"
               >
-                <BarChart3 className="w-3 h-3" />
+                <BarChart3 className="size-3" />
                 Explore All Tools
               </button>
             </div>
@@ -499,7 +499,7 @@ export default function DataHubPage() {
                 onClick={() => setShowImportModal(false)}
                 className="p-1 hover:bg-[rgba(216,231,242,0.1)] rounded-lg transition"
               >
-                <X className="w-4 h-4 text-[rgba(216,231,242,0.7)]" />
+                <X className="size-4 text-[rgba(216,231,242,0.7)]" />
               </button>
             </div>
             <div className="space-y-4">
@@ -539,7 +539,7 @@ export default function DataHubPage() {
                 onClick={() => setShowAddSourceModal(false)}
                 className="p-1 hover:bg-[rgba(216,231,242,0.1)] rounded-lg transition"
               >
-                <X className="w-4 h-4 text-[rgba(216,231,242,0.7)]" />
+                <X className="size-4 text-[rgba(216,231,242,0.7)]" />
               </button>
             </div>
             <div className="space-y-3">

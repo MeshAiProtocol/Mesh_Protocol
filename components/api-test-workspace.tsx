@@ -149,10 +149,10 @@ export function ApiTestWorkspace({ session }: { session: Session }) {
   };
 
   const getStatusIcon = (status: number) => {
-    if (status >= 200 && status < 300) return <CheckCircle className="w-4 h-4 text-green-500" />;
-    if (status >= 400 && status < 500) return <AlertCircle className="w-4 h-4 text-yellow-500" />;
-    if (status >= 500) return <XCircle className="w-4 h-4 text-red-500" />;
-    return <Globe className="w-4 h-4 text-blue-500" />;
+    if (status >= 200 && status < 300) return <CheckCircle className="size-4 text-green-500" />;
+    if (status >= 400 && status < 500) return <AlertCircle className="size-4 text-yellow-500" />;
+    if (status >= 500) return <XCircle className="size-4 text-red-500" />;
+    return <Globe className="size-4 text-blue-500" />;
   };
 
   const getStatusColor = (status: number) => {
@@ -169,11 +169,11 @@ export function ApiTestWorkspace({ session }: { session: Session }) {
         <WorkspacePanel
           title="Request Builder"
           subtitle="Configure and send HTTP requests"
-          icon={<Code className="w-4 h-4" />}
+          icon={<Code className="size-4" />}
           headerActions={
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm">
-                <Save className="w-4 h-4 mr-2" />
+                <Save className="size-4 mr-2" />
                 Save
               </Button>
               <Button 
@@ -182,7 +182,7 @@ export function ApiTestWorkspace({ session }: { session: Session }) {
                 size="sm"
                 className="bg-blue-600 hover:bg-blue-700"
               >
-                <Send className="w-4 h-4 mr-2" />
+                <Send className="size-4 mr-2" />
                 {isLoading ? 'Sending...' : 'Send'}
               </Button>
             </div>
@@ -248,7 +248,7 @@ export function ApiTestWorkspace({ session }: { session: Session }) {
                         size="icon"
                         onClick={() => removeHeader(key)}
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="size-4" />
                       </Button>
                     </div>
                   ))}
@@ -257,7 +257,7 @@ export function ApiTestWorkspace({ session }: { session: Session }) {
                     onClick={() => updateHeader('', '')}
                     className="w-full"
                   >
-                    <Plus className="w-4 h-4 mr-2" />
+                    <Plus className="size-4 mr-2" />
                     Add Header
                   </Button>
                 </div>
@@ -305,7 +305,7 @@ export function ApiTestWorkspace({ session }: { session: Session }) {
         <WorkspacePanel
           title="Response"
           subtitle={response ? `${response.status} ${response.statusText}` : 'No response yet'}
-          icon={response ? getStatusIcon(response.status) : <Database className="w-4 h-4" />}
+          icon={response ? getStatusIcon(response.status) : <Database className="size-4" />}
           headerActions={
             response && (
               <div className="flex items-center gap-2">
@@ -313,11 +313,11 @@ export function ApiTestWorkspace({ session }: { session: Session }) {
                   {response.status}
                 </Badge>
                 <Badge variant="outline">
-                  <Clock className="w-3 h-3 mr-1" />
+                  <Clock className="size-3 mr-1" />
                   {response.duration}ms
                 </Badge>
                 <Button variant="outline" size="sm">
-                  <Copy className="w-4 h-4 mr-2" />
+                  <Copy className="size-4 mr-2" />
                   Copy
                 </Button>
               </div>
@@ -379,7 +379,7 @@ export function ApiTestWorkspace({ session }: { session: Session }) {
                       </CardHeader>
                       <CardContent>
                         <div className="flex items-center gap-2">
-                          <Clock className="w-4 h-4" />
+                          <Clock className="size-4" />
                           <span className="font-mono">{response.duration}ms</span>
                         </div>
                       </CardContent>
@@ -399,10 +399,10 @@ export function ApiTestWorkspace({ session }: { session: Session }) {
         <WorkspacePanel
           title="Collections"
           subtitle="Manage saved requests"
-          icon={<FolderOpen className="w-4 h-4" />}
+          icon={<FolderOpen className="size-4" />}
           headerActions={
             <Button variant="outline" size="sm">
-              <Plus className="w-4 h-4 mr-2" />
+              <Plus className="size-4 mr-2" />
               New
             </Button>
           }
