@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { MessageSquare, Brain, Sparkles, Code, Workflow, Database, Zap, BarChart3, Users, Settings, ArrowRight, Plus, TrendingUp, Activity, Clock, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { CryptoWidget } from "@/components/crypto-widget";
 
 interface DashboardContentProps {
   session: any;
@@ -49,6 +50,15 @@ export function DashboardContent({ session }: DashboardContentProps) {
       popular: true,
       color: "purple",
     },
+    {
+      name: "Crypto Tracker",
+      description: "Real-time cryptocurrency prices and market data",
+      icon: <TrendingUp className="size-6 text-yellow-400" />,
+      path: "/crypto",
+      category: "Finance",
+      popular: true,
+      color: "yellow",
+    },
   ];
 
   const quickStats = [
@@ -71,6 +81,7 @@ export function DashboardContent({ session }: DashboardContentProps) {
       purple: "from-purple-500/20 to-purple-600/10 border-purple-500/20",
       green: "from-green-500/20 to-green-600/10 border-green-500/20",
       orange: "from-orange-500/20 to-orange-600/10 border-orange-500/20",
+      yellow: "from-yellow-500/20 to-yellow-600/10 border-yellow-500/20",
     };
     return colorMap[color as keyof typeof colorMap] || "from-gray-500/20 to-gray-600/10 border-gray-500/20";
   };
@@ -132,7 +143,7 @@ export function DashboardContent({ session }: DashboardContentProps) {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {tools.map((tool, index) => (
               <Card key={index} onClick={() => router.push(tool.path)} className="glass-card p-6 rounded-2xl hover:bg-[rgba(216,231,242,0.02)] transition-all cursor-pointer group hover:scale-[1.02] border border-[rgba(216,231,242,0.08)]">
                 <div className="flex items-start gap-4 mb-4">
@@ -164,8 +175,13 @@ export function DashboardContent({ session }: DashboardContentProps) {
           </div>
         </div>
 
-        {/* Recent Activity & Quick Actions */}
+        {/* Crypto Widget & Quick Actions */}
         <div className="space-y-6">
+          <div>
+            <h2 className="text-xl font-semibold text-white mb-4">Crypto Market</h2>
+            <CryptoWidget compact={true} />
+          </div>
+
           <div>
             <h2 className="text-xl font-semibold text-white mb-4">Recent Activity</h2>
             <div className="space-y-3">
@@ -190,17 +206,17 @@ export function DashboardContent({ session }: DashboardContentProps) {
                 <MessageSquare className="size-4 mr-3" />
                 Start New Chat
               </Button>
+              <Button onClick={() => router.push("/crypto")} className="w-full glass-card p-4 rounded-xl justify-start hover:bg-[rgba(216,231,242,0.02)] transition-all text-white border border-[rgba(216,231,242,0.08)]" variant="ghost">
+                <TrendingUp className="size-4 mr-3" />
+                View Crypto Tracker
+              </Button>
               <Button onClick={() => handleQuickAction("api")} className="w-full glass-card p-4 rounded-xl justify-start hover:bg-[rgba(216,231,242,0.02)] transition-all text-white border border-[rgba(216,231,242,0.08)]" variant="ghost">
                 <Code className="size-4 mr-3" />
                 Test API
               </Button>
-              <Button onClick={() => handleQuickAction("workflow")} className="w-[180px] glass-card p-4 rounded-xl justify-start hover:bg-[rgba(216,231,242,0.02)] transition-all text-white border border-[rgba(216,231,242,0.08)]" variant="ghost">
+              <Button onClick={() => handleQuickAction("workflow")} className="w-full glass-card p-4 rounded-xl justify-start hover:bg-[rgba(216,231,242,0.02)] transition-all text-white border border-[rgba(216,231,242,0.08)]" variant="ghost">
                 <Workflow className="size-4 mr-3" />
                 Create Workflow
-              </Button>
-              <Button onClick={() => handleQuickAction("data")} className="w-full glass-card p-4 rounded-xl justify-start hover:bg-[rgba(216,231,242,0.02)] transition-all text-white border border-[rgba(216,231,242,0.08)]" variant="ghost">
-                <Database className="size-4 mr-3" />
-                Import Data
               </Button>
             </div>
           </div>
