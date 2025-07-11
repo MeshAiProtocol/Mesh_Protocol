@@ -102,7 +102,7 @@ export function DashboardContent({ session }: DashboardContentProps) {
           <h1 className="text-3xl font-bold text-white">Dashboard</h1>
           <p className="text-[rgba(216,231,242,0.7)] text-lg">Welcome to Mesh AI Protocol</p>
         </div>
-        <Button onClick={() => handleQuickAction("chat")} className="glass-card px-6 py-3 rounded-xl font-medium text-white bg-blue-600/80 hover:bg-blue-700/80 transition shadow-md border-0 flex items-center gap-2">
+        <Button onClick={() => handleQuickAction("chat")} className="w-[180px] glass-card px-6 py-3 rounded-xl font-medium text-white bg-blue-600/80 hover:bg-blue-700/80 transition shadow-md border-0 flex items-center gap-2">
           <Plus className="size-4" />
           Quick Start
         </Button>
@@ -194,7 +194,7 @@ export function DashboardContent({ session }: DashboardContentProps) {
                 <Code className="size-4 mr-3" />
                 Test API
               </Button>
-              <Button onClick={() => handleQuickAction("workflow")} className="w-full glass-card p-4 rounded-xl justify-start hover:bg-[rgba(216,231,242,0.02)] transition-all text-white border border-[rgba(216,231,242,0.08)]" variant="ghost">
+              <Button onClick={() => handleQuickAction("workflow")} className="w-[180px] glass-card p-4 rounded-xl justify-start hover:bg-[rgba(216,231,242,0.02)] transition-all text-white border border-[rgba(216,231,242,0.08)]" variant="ghost">
                 <Workflow className="size-4 mr-3" />
                 Create Workflow
               </Button>
