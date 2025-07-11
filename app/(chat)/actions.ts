@@ -20,17 +20,44 @@ export async function generateTitleFromUserMessage({
 }: {
   message: UIMessage;
 }) {
-  const { text: title } = await generateText({
-    model: myProvider.languageModel('title-model'),
-    system: `\n
-    - you will generate a short title based on the first message a user begins a conversation with
-    - ensure it is not more than 80 characters long
-    - the title should be a summary of the user's message
-    - do not use quotes or colons`,
-    prompt: JSON.stringify(message),
-  });
+  try {
+    console.log('[Title Generation] Generating title for message:', message.content);
+    
+    const { text: title } = await generateText({
+      model: myProvider.languageModel('title-model'),
+      system: `Generate a short, descriptive title (max 80 characters) based on the user's first message. 
+      Make it clear and specific to their question or topic. 
+      Do not use quotes, colons, or generic phrases like "Simple Greeting".
+      Examples:
+      - User asks about Bitcoin price → "Bitcoin Price Inquiry"
+      - User asks about crypto trading → "Crypto Trading Discussion"
+      - User asks about coding help → "Programming Help Request"`,
+      prompt: message.content || JSON.stringify(message),
+    });
 
-  return title;
+    console.log('[Title Generation] Generated title:', title);
+    
+    // Fallback if title is too generic or empty
+    if (!title || title.trim().length === 0 || title.toLowerCase().includes('simple greeting') || title.toLowerCase().includes('test title')) {
+      const fallbackTitle = message.content 
+        ? `Chat: ${message.content.slice(0, 50)}${message.content.length > 50 ? '...' : ''}`
+        : `New Chat ${new Date().toLocaleDateString()}`;
+      
+      console.log('[Title Generation] Using fallback title:', fallbackTitle);
+      return fallbackTitle;
+    }
+
+    return title;
+  } catch (error) {
+    console.error('[Title Generation] Error generating title:', error);
+    // Fallback title based on message content
+    const fallbackTitle = message.content 
+      ? `Chat: ${message.content.slice(0, 50)}${message.content.length > 50 ? '...' : ''}`
+      : `New Chat ${new Date().toLocaleDateString()}`;
+    
+    console.log('[Title Generation] Using error fallback title:', fallbackTitle);
+    return fallbackTitle;
+  }
 }
 
 export async function deleteTrailingMessages({ id }: { id: string }) {

@@ -132,8 +132,9 @@ export default function WorkflowsPage() {
   const handleTemplateClick = (templateName: string) => {
     console.log("Creating workflow from template:", templateName);
     setShowCreateModal(false);
-    // In a real app, this would navigate to the workflow builder with template
-    alert(`Creating "${templateName}" workflow...`);
+    // Navigate to workflow builder with template
+    const templateSlug = templateName.toLowerCase().replace(/\s+/g, "-");
+    router.push(`/workflows/create?template=${templateSlug}`);
   };
 
   const handleViewAllWorkflows = () => {
@@ -142,6 +143,27 @@ export default function WorkflowsPage() {
 
   const handleViewAllTemplates = () => {
     router.push("/workflows/templates");
+  };
+
+  const handleCreateWorkflowType = (type: string) => {
+    setShowCreateModal(false);
+
+    switch (type) {
+      case "From Template":
+        router.push("/workflows/templates?action=create");
+        break;
+      case "Blank Workflow":
+        router.push("/workflows/create?type=blank");
+        break;
+      case "Import from File":
+        router.push("/workflows/import");
+        break;
+      case "AI Assistant":
+        router.push("/workflows/create?type=ai-assisted");
+        break;
+      default:
+        console.log("Unknown workflow type:", type);
+    }
   };
 
   return (
@@ -287,14 +309,7 @@ export default function WorkflowsPage() {
             </div>
             <div className="space-y-3">
               {["From Template", "Blank Workflow", "Import from File", "AI Assistant"].map((type) => (
-                <button
-                  key={type}
-                  onClick={() => {
-                    setShowCreateModal(false);
-                    alert(`Creating workflow: ${type}`);
-                  }}
-                  className="w-full glass-card p-3 rounded-xl text-left hover:bg-[rgba(216,231,242,0.02)] transition"
-                >
+                <button key={type} onClick={() => handleCreateWorkflowType(type)} className="w-full glass-card p-3 rounded-xl text-left hover:bg-[rgba(216,231,242,0.02)] transition">
                   <span className="text-white font-medium">{type}</span>
                 </button>
               ))}
