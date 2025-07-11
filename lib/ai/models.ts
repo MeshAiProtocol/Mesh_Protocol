@@ -9,12 +9,12 @@ export interface ChatModel {
 export const chatModels: Array<ChatModel> = [
   {
     id: 'chat-model',
-    name: 'Chat model',
-    description: 'Primary model for all-purpose chat',
+    name: 'Mesh AI Crypto',
+    description: 'Specialized crypto and blockchain expert model',
   },
   {
     id: 'chat-model-reasoning',
-    name: 'Reasoning model',
-    description: 'Uses advanced reasoning',
+    name: 'Mesh AI Crypto Pro',
+    description: 'Advanced crypto analysis with deep reasoning',
   },
 ];
