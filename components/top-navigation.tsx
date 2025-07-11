@@ -18,13 +18,7 @@ const workspaces = [
     path: "/",
     description: "Overview and quick access to all tools",
   },
-  {
-    id: "api-test",
-    label: "API Testing",
-    icon: Code,
-    path: "/api-test",
-    description: "Test and debug APIs",
-  },
+
   {
     id: "workflows",
     label: "Workflows",
@@ -45,6 +39,13 @@ const workspaces = [
     icon: MessageSquare,
     path: "/chat",
     description: "Conversational AI interface",
+  },
+  {
+    id: "api-test",
+    label: "API Testing",
+    icon: Code,
+    path: "/api-test",
+    description: "Test and debug APIs",
   },
 ];
 
